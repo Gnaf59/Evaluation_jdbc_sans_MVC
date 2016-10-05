@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.gauthier.application;
+package ihmMPT;
 
-import com.gauthier.entities.Adherent;
-import com.gauthier.entities.BaseDeDonnee;
-import com.gauthier.entities.Representation;
+import metier.Adherent;
+import interBD.GestionDonnees;
+import metier.Representation;
 import java.awt.event.KeyEvent;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
@@ -18,23 +18,23 @@ import javax.swing.JOptionPane;
  *
  * @author Dev
  */
-public class EcranReservation extends javax.swing.JFrame {
+public class IHMReservations extends javax.swing.JFrame {
 
     
     /**
      * Creates new form IHMReservation
      */
-    public EcranReservation() {
+    public IHMReservations() {
         
         initComponents();
-       // BaseDeDonnee bdd=new BaseDeDonnee();
-        for(int i=0;i<BaseDeDonnee.getAdherentList().size();i++)
+       // GestionDonnees bdd=new GestionDonnees();
+        for(int i=0;i<GestionDonnees.getAdherentList().size();i++)
         {
-            listAdherent.addItem(BaseDeDonnee.getAdherentList().get(i).toString());
+            listAdherent.addItem(GestionDonnees.getAdherentList().get(i).toString());
         }
-        for(int i=0;i<BaseDeDonnee.getRepresentationList().size();i++)
+        for(int i=0;i<GestionDonnees.getRepresentationList().size();i++)
         {
-            listRepresentation.addItem(BaseDeDonnee.getRepresentationList().get(i).toString());
+            listRepresentation.addItem(GestionDonnees.getRepresentationList().get(i).toString());
         }
         this.setVisible(true);
         
@@ -210,7 +210,7 @@ public class EcranReservation extends javax.swing.JFrame {
 
     private void champNombrePersKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_champNombrePersKeyReleased
 
-         BaseDeDonnee.calculTotal(champTotal, champNombrePers, listRepresentation);   
+         GestionDonnees.calculTotal(champTotal, champNombrePers, listRepresentation);   
                 
     }//GEN-LAST:event_champNombrePersKeyReleased
 
@@ -220,23 +220,24 @@ public class EcranReservation extends javax.swing.JFrame {
 
     private void listRepresentationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listRepresentationActionPerformed
  
-       BaseDeDonnee.calculTotal(champTotal, champNombrePers, listRepresentation);
+       GestionDonnees.calculTotal(champTotal, champNombrePers, listRepresentation);
     }//GEN-LAST:event_listRepresentationActionPerformed
 
     private void btValiderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btValiderActionPerformed
-       if(!"".equals(champNombrePers.getText()))
+       if(!"".equals(champNombrePers.getText())&& !"".equals(listAdherent.getSelectedItem().toString())&& !"".equals(listRepresentation.getSelectedItem().toString()))
        {
            try
             {
-                BaseDeDonnee bdd=new BaseDeDonnee();
+                GestionDonnees bdd=new GestionDonnees();
                 bdd.getConnection();
-                Adherent adherent= BaseDeDonnee.getAdherentList().get(listAdherent.getSelectedIndex());
-                Representation representation=BaseDeDonnee.getRepresentationList().get(listRepresentation.getSelectedIndex());
+                Adherent adherent= GestionDonnees.getAdherentList().get(listAdherent.getSelectedIndex());
+                Representation representation=GestionDonnees.getRepresentationList().get(listRepresentation.getSelectedIndex());
                 bdd.enregistrementReservation(representation,adherent , Integer.parseInt(champNombrePers.getText()));
                 bdd.closeConnection();
 
             JOptionPane.showMessageDialog(null, "Reservation effectué avec succés", "Reservation", JOptionPane.INFORMATION_MESSAGE);
 
+            
             }
             catch(SQLException sqlex)
             {
@@ -245,7 +246,7 @@ public class EcranReservation extends javax.swing.JFrame {
        }
        else
        {
-          JOptionPane.showMessageDialog(null, "Veuillez remplir correctement les champs", "ERREUR", JOptionPane.ERROR_MESSAGE); 
+          JOptionPane.showMessageDialog(null, "Veuillez remplir correctement les champs\n aucun champ vide accepté", "ERREUR", JOptionPane.ERROR_MESSAGE); 
        }
        
        

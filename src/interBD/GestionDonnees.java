@@ -3,7 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.gauthier.entities;
+package interBD;
+import metier.Adherent;
+import metier.Representation;
 import java.sql.*; 
 import java.util.ArrayList;
 import javax.swing.JComboBox;
@@ -14,7 +16,7 @@ import oracle.jdbc.driver.*;
  *
  * @author Dev
  */
-public class BaseDeDonnee {
+public class GestionDonnees {
     
     //url du serveur oracle
    private String url="jdbc:oracle:thin:@localhost:1521:xe";
@@ -28,7 +30,7 @@ public class BaseDeDonnee {
    private static ArrayList<Adherent> adherentList=new ArrayList<>();
    private static ArrayList<Representation> representationList=new ArrayList<>();
 
-    public BaseDeDonnee() {
+    public GestionDonnees() {
         try 
         {
             Class.forName( "oracle.jdbc.driver.OracleDriver" );

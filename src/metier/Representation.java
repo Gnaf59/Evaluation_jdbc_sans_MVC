@@ -1,4 +1,4 @@
-package com.gauthier.entities;
+package metier;
 
 import java.awt.TextField;
 import java.util.Date;

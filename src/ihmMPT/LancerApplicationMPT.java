@@ -3,23 +3,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.gauthier.application;
+package ihmMPT;
 
-import com.gauthier.entities.BaseDeDonnee;
+import interBD.GestionDonnees;
 
 /**
  *
  * @author Dev
  */
-public class Application {
+public class LancerApplicationMPT {
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        BaseDeDonnee bdd=new BaseDeDonnee();
+        GestionDonnees bdd=new GestionDonnees();
         bdd.remplirCollections();
-        new EcranReservation();
+        new IHMReservations();
     }
     
 }
