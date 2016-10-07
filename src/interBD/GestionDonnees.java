@@ -110,6 +110,10 @@ public class GestionDonnees {
             {
                 JOptionPane.showMessageDialog(null, ex.getMessage(), "Problème requête SELECT", JOptionPane.ERROR_MESSAGE);
             }
+            catch (NullPointerException ex)
+            {
+                JOptionPane.showMessageDialog(null, "Impossible de charger les JCombobox aucune donnée", "Problème requête SELECT", JOptionPane.ERROR_MESSAGE);
+            }
             finally
             {
                 closeConnection();
